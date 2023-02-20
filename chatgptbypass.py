@@ -22,7 +22,7 @@ temperature = 1.0
 # Loop principal para permitir várias consultas
 while True:
     # Solicita entrada do usuário
-    write = input("Ask me anything: ")
+    write = input("Ask me anything: \n")
     
     # Verifica se a entrada não está vazia
     if not write:
@@ -48,10 +48,10 @@ while True:
     if response.status_code == 200:
         response_data = json.loads(response.text)
         text = response_data['choices'][0]['text']
-        print(text)
+        print("\n" + text)
 
         # Pergunta se o usuário deseja salvar a resposta em um arquivo
-        choice = input("Do you want to save the response to a file? [y/n]: ")
+        choice = input("\nDo you want to save the response to a file? [y/n]: ")
         if choice.lower() == 'y':
             # Solicita ao usuário um nome para o arquivo de saída
             filename = input("Please enter a name for the output file (without extension): ")
@@ -61,7 +61,7 @@ while True:
                 # Grava a resposta no arquivo de saída
                 with open(filename, 'w') as f:
                     f.write(text)
-                    print(f"Response saved to {filename}")
+                    print(f"\nResponse saved to {filename}")
             except Exception as e:
                 print(f"An error occurred while writing the file: {e}")
 
@@ -69,6 +69,6 @@ while True:
         print('API error: ', response.text)
     
     # Pergunta se o usuário deseja fazer outra consulta
-    choice = input("Do you want to ask something else? [y/n]: ")
+    choice = input("\nDo you want to ask something else? [y/n]: ")
     if choice.lower() != 'y':
         break
